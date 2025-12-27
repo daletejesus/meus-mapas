@@ -1,65 +1,118 @@
-import Image from "next/image";
+"use client"
+import { PrimaryButton } from "@/components/Button";
+import { ListItemMapas } from "@/components/ListItem";
+import { useEffect, useState } from "react";
+import { Modal } from "@/components/Modal";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+
 
 export default function Home() {
+  const [valor, setValor] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [activeModal, setActiveModal] = useState<boolean>(false);
+  const [mapaCriado, setMapaCriado] = useState<any>(false);
+  
+  const router = useRouter();
+
+  useEffect(() => {
+    async function retornarMapas() {
+      try {
+        const response = await axios.get("/api/mapa");
+        setValor(response.data);
+
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    retornarMapas();
+  }, [mapaCriado]);
+
+  function OpenOrCloseModal() {
+    setActiveModal(!activeModal);
+  }
+
+  async function CriarMapas(data: {
+    nome: string;
+  }) {
+    try {
+
+      const send = await axios.post("/api/mapa", {
+        name: data.nome,
+      })
+
+      console.log(send.data);
+
+      setMapaCriado(send.data)
+
+    } catch (error) {
+      console.error("Erro ao criar mapa", error);
+    }
+    
+  }
+
+  async function excluirMapa(id: number) {
+    try {
+
+      console.log(id);
+
+      const send = await axios.patch("/api/mapa", {
+        id: id,
+        status: false
+      })
+
+      console.log(send.data);
+
+      setMapaCriado(send.data)
+
+    } catch (error) {
+      console.error("Erro ao criar mapa", error);
+    }
+    
+  }
+
+  function Redirect(id: number) {
+    router.push(`/mapa/${id}`);
+  }
+  
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="flex items-center justify-center h-full bg-[#0c101a]">
+      <div className="h-[80%] w-[60%] bg-[#181e2e] rounded-xl shadow-xl ">
+        <div className="w-full flex pb-6 mb-4">
+          <div className="w-full h-[100px] flex items-center border-b border-[#303744] bg-[#1b2236] rounded-t-lg px-8">
+            <div className="w-[85%]">
+              <h1 className="text-3xl font-bold">Mapas disponíveis</h1>
+            </div>
+            <div className="w-[15%]">
+              <PrimaryButton text="Criar Mapa" onClick={() => {OpenOrCloseModal()}}/>
+            </div>
+            
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="w-full flex flex-col gap-2">
+          {loading ? (
+            <div className="h-full flex items-center justify-center">
+              Carregando...
+            </div>
+          ) : valor.length === 0 ? (
+            <div className="h-full flex items-center justify-center">
+              Sem dados a mostrar
+            </div>
+          ):(
+            <div className="px-10 flex flex-col gap-2">
+              {valor.map((item, index) => (
+                <ListItemMapas key={index} title={item.name} pontos={item.pontos} isSelected={selectedId === item.id} onClick={() => Redirect(item.id)} exclude={() => excluirMapa(item.id)}/>
+              ))}
+            </div>
+          )}
         </div>
-      </main>
+      </div>
+      <Modal type="mapa" visible={activeModal} onClose={OpenOrCloseModal} onSent={CriarMapas}/>
     </div>
   );
 }
