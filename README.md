@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 📌 Descrição Geral do Projeto
 
-## Getting Started
+Este projeto foi desenvolvido utilizando *Next.js, TypeScript e Tailwind CSS*, estruturado para oferecer uma aplicação moderna, organizada e escalável.  
+No back-end, foram criadas rotas de API seguindo o padrão *REST, utilizando os métodos **GET, POST e PATCH*.  
+No front-end, a biblioteca *Leaflet* é responsável por capturar latitude e longitude e enviar esses dados para o servidor, onde as informações são registradas no banco de dados através do *Prisma* conectado ao *PostgreSQL*.
 
-First, run the development server:
+Essa combinação permite uma aplicação consistente, tipada, com melhor manutenção e segurança na troca de dados entre cliente e servidor.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🗺️ Mapa, Localização e Banco de Dados
+- Captura de coordenadas (latitude/longitude) via Leaflet (front-end)
+- Envio dos dados para o servidor via rotas REST
+- Registro das informações no banco utilizando Prisma + PostgreSQL
+- Estrutura pensada para escalabilidade e organização do código
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ♻️ Diferencial do Projeto
 
-## Learn More
+O projeto utiliza um sistema de *exclusão lógica* aplicado através do método *HTTP PATCH*:
 
-To learn more about Next.js, take a look at the following resources:
+✔ Quando o usuário “exclui” um mapa ou ponto, o registro *não é apagado do banco*  
+✔ O sistema altera o campo status para false  
+✔ O item deixa de aparecer na interface, como se estivesse realmente excluído  
+✔ O registro é mantido para *histórico, auditoria e controle interno*
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> Isso evita perda de dados, facilita rastreamento e garante maior segurança estrutural ao sistema.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🛠️ Tecnologias Utilizadas
+- *Next.js*
+- *TypeScript*
+- *Tailwind CSS*
+- *Leaflet*
+- *Prisma ORM*
+- *PostgreSQL*
+- *REST API (GET, POST e PATCH)*
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
