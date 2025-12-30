@@ -20,6 +20,7 @@ export async function POST(req: Request) {
         return Response.json(mapas);
 
     } catch (error) {
+          
         return Response.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }
@@ -46,6 +47,7 @@ export async function PATCH(req: Request) {
     return Response.json(mapa);
 
   } catch (error) {
+      
     return Response.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
@@ -84,6 +86,7 @@ export async function GET(req: Request) {
         return Response.json(mapasFormatados);
 
     } catch (error) {
+         
         return Response.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }

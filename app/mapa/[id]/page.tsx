@@ -6,7 +6,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Modal } from "@/components/Modal";
 import { useParams } from "next/navigation";
-import Map  from "@/components/Map";
+import dynamic from "next/dynamic";
+
+const Map = dynamic(() => import("@/components/Map"), {
+  ssr: false,
+});
 
 type Ponto = {
   id: number;
@@ -140,8 +144,8 @@ export default function Home() {
       <div className="w-[70%] bg-white overflow-hidden">
         <Map
           key={selectedItem?.id}
-          lat={ selectedItem ? selectedItem.latitude : 0 }
-          lng={ selectedItem ? selectedItem.longitude : 0 }
+          lat={ selectedItem ? selectedItem.latitude : -15.794840100854168  }
+          lng={ selectedItem ? selectedItem.longitude : -47.89206007906242 }
           nome={ selectedItem ? selectedItem.name : "" }
         />
       </div>

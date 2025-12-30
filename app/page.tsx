@@ -86,7 +86,7 @@ export default function Home() {
         <div className="w-full flex pb-6 mb-4">
           <div className="w-full h-[100px] flex items-center border-b border-[#303744] bg-[#1b2236] rounded-t-lg px-8">
             <div className="w-[85%]">
-              <h1 className="text-3xl font-bold">Mapas disponíveis</h1>
+              <h1 className="text-3xl font-bold text-white">Mapas disponíveis</h1>
             </div>
             <div className="w-[15%]">
               <PrimaryButton text="Criar Mapa" onClick={() => {OpenOrCloseModal()}}/>
@@ -96,11 +96,11 @@ export default function Home() {
         </div>
         <div className="w-full flex flex-col gap-2">
           {loading ? (
-            <div className="h-full flex items-center justify-center">
+            <div className="h-full flex items-center justify-center text-white">
               Carregando...
             </div>
           ) : valor.length === 0 ? (
-            <div className="h-full flex items-center justify-center">
+            <div className="h-full flex items-center justify-center text-white">
               Sem dados a mostrar
             </div>
           ):(
