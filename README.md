@@ -23,9 +23,6 @@ O projeto utiliza um sistema de *exclusão lógica* aplicado através do método
 ✔ Quando o usuário “exclui” um mapa ou ponto, o registro *não é apagado do banco*  
 ✔ O sistema altera o campo status para false  
 ✔ O item deixa de aparecer na interface, como se estivesse realmente excluído  
-✔ O registro é mantido para *histórico, auditoria e controle interno*
-
-> Isso evita perda de dados, facilita rastreamento e garante maior segurança estrutural ao sistema.
 
 ---
 
