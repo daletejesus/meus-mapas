@@ -7,6 +7,7 @@ import axios from "axios";
 import { Modal } from "@/components/Modal";
 import { useParams } from "next/navigation";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 
 const Map = dynamic(() => import("@/components/Map"), {
   ssr: false,
@@ -32,6 +33,7 @@ export default function Home() {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [activeModal, setActiveModal] = useState<boolean>(false);
   const [pontoCriado, setPontoCriado] = useState<any>(false);
+  const router = useRouter(); 
 
   const selectedItem = valor.find(item => item.id === selectedId);
 
@@ -54,8 +56,12 @@ export default function Home() {
           setSelectedId(null);
         }
 
-      } catch (error) {
-        console.error("Error fetching users:", error);
+      } catch (error: any) {
+        if (error.response?.status === 404) {
+          router.replace("/not-found"); // 👈 redireciona
+        } else {
+          console.error("Erro ao buscar pontos", error);
+        }
       } finally {
         setLoading(false);
       }
@@ -77,7 +83,7 @@ export default function Home() {
 
       const send = await axios.post("/api/ponto", {
         name: data.nome,
-        idMapa: Number(id),
+        idMapa: id,
         latitude: data.latitude,
         longitude: data.longitude
       })

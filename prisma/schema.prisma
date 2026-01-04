@@ -4,7 +4,7 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
-generator client {
+generator client { // Client usado nas rotas HTTP
   provider = "prisma-client"
   output   = "../app/generated/prisma"
 }
@@ -13,9 +13,13 @@ datasource db {
   provider = "postgresql"
 }
 
+generator clientNode { // Client usado para arquivo Seed
+  provider = "prisma-client-js"
+}
+
 
 model Mapa {
-  id        Int      @id @default(autoincrement())
+  id        String      @id @default(cuid())
   name      String
   dataCadastro DateTime @default(now())
   status    Boolean     @default(true)
@@ -24,13 +28,13 @@ model Mapa {
 }
 
 model Ponto {
-  id        Int      @id @default(autoincrement())
-  idPonto   Int
+  id        String      @id @default(cuid())
+  idMapa    String
   name      String
   latitude  String
   longitude String
   dataCadastro DateTime @default(now())
   status    Boolean
 
-  mapa   Mapa @relation(fields: [idPonto], references: [id])
+  mapa   Mapa @relation(fields: [idMapa], references: [id])
 }

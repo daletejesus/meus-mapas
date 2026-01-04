@@ -6,7 +6,9 @@ export async function POST(req: Request) {  // Função assincrona para o metodo
         
         // Recebe exatamente os dados enviados no corpo da requisição
         
-        const { name, idMapa, latitude, longitude } = await req.json() as {name: string, idMapa: number, latitude: string, longitude: string}; 
+        const { id, name, idMapa, latitude, longitude } = await req.json() as {id?: string, name: string, idMapa: string, latitude: string, longitude: string}; 
+
+        console.log(name, idMapa, latitude, longitude);
 
         // Caso o corpo não tenha esses nomes, retorna erro 400 (bad request)
         if (!name || !idMapa || !latitude || !longitude) {
@@ -17,19 +19,33 @@ export async function POST(req: Request) {  // Função assincrona para o metodo
         console.log(name, idMapa, latitude, longitude);
 
         // Utilizamos o prisma para criar um novo ponto no banco de dados
-        const pontos = await prisma.ponto.create({
-            data: {
-                name,
-                idPonto: idMapa, // Valor do mapa para relacionar com o ponto
-                latitude,
-                longitude,
-                status: true
-            }
-        })
+        let pontos
+        if (id) {
+            pontos = await prisma.ponto.create({
+                data: {
+                    id,
+                    name,
+                    idMapa: idMapa, // Valor do mapa para relacionar com o ponto
+                    latitude,
+                    longitude,
+                    status: true
+                }
+            })
+        } else {
+            pontos = await prisma.ponto.create({
+                data: {
+                    name,
+                    idMapa: idMapa, // Valor do mapa para relacionar com o ponto
+                    latitude,
+                    longitude,
+                    status: true
+                }
+            })
+        }
 
         return Response.json(pontos); // Retornamos como as informacoes de criacao do ponto em caso de sucesso
 
-    } catch (error) { // Estrutura `Catch` para capturar erros inesperados
+    } catch (error) { // Estrutura Catch para capturar erros inesperados
         return Response.json({ error: "Internal Server Error" }, { status: 500 }); // Retorna erro 500 em caso de falha
     }
 }
@@ -37,7 +53,7 @@ export async function POST(req: Request) {  // Função assincrona para o metodo
 export async function PATCH(req: Request) {
   try {
     const { id, status } = await req.json() as {
-      id: number;
+      id: string;
       status: boolean;
     };
 
@@ -65,9 +81,9 @@ export async function GET(req: Request) {
     try {
         
         const { searchParams } = new URL(req.url);
-        const idMapa = Number(searchParams.get("idMapa"));
+        const idMapa = searchParams.get("idMapa");
 
-        if (!idMapa) {
+        if (!idMapa) { // 0 é o id de teste
             return Response.json({ error: "O Id do mapa é obrigatório" }, { status: 400 });
         }
 
@@ -91,7 +107,7 @@ export async function GET(req: Request) {
             
         const pontos = await prisma.ponto.findMany({
             where: {
-                idPonto: idMapa,
+                idMapa: idMapa,
                 status: true
             }
         })

@@ -4,23 +4,36 @@ export async function POST(req: Request) {
 
     try {
         
-        const { name } = await req.json() as {name: string};
-
+        const { id, name } = await req.json() as {id?: string, name: string};
+        console.log(id, name)
+        
         if (!name) {
             return Response.json({ error: "Name é obrigatório" }, { status: 400 });
         }
 
-        const mapas = await prisma.mapa.create({
-            data: {
-                name: name,
-                status: true
-            }
-        })
+        let mapas
+        if (id) {
+            mapas = await prisma.mapa.create({
+                data: {
+                    id: id,
+                    name: name,
+                    status: true
+                }
+            })
+        } else {
+            mapas = await prisma.mapa.create({
+                data: {
+                    name: name,
+                    status: true
+                }
+            })
+        }
+
+        
 
         return Response.json(mapas);
 
     } catch (error) {
-          
         return Response.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }
@@ -28,7 +41,7 @@ export async function POST(req: Request) {
 export async function PATCH(req: Request) {
   try {
     const { id, status } = await req.json() as {
-      id: number;
+      id: string;
       status: boolean;
     };
 
@@ -47,7 +60,6 @@ export async function PATCH(req: Request) {
     return Response.json(mapa);
 
   } catch (error) {
-      
     return Response.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
@@ -74,7 +86,7 @@ export async function GET(req: Request) {
             }
         })
 
-        const mapasFormatados = mapas.map(mapa => {
+        const mapasFormatados = mapas.map((mapa:any) => {
         const { _count, ...resto } = mapa;
 
             return {
@@ -86,7 +98,6 @@ export async function GET(req: Request) {
         return Response.json(mapasFormatados);
 
     } catch (error) {
-         
         return Response.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }
