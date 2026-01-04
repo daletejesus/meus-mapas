@@ -36,7 +36,7 @@ Essa combinação permite uma aplicação consistente, tipada, com melhor manute
 - Testes end-to-end das funcionalidades disponíveis;
 - Collection das rotas HTTP para o Postman;
 - Animações utilizando o motion;
-- Exlusão lógica dos items ao invés de exclusão física;
+- Exclusão lógica dos items ao invés de exclusão física;
 
 ## 🚀 Como executar o projeto
 
@@ -56,8 +56,8 @@ Git
 
 
 ## 📦 Clonando o repositório
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
+git clone https://github.com/daletejesus/meus-mapas
+cd meus-mapas
 
 ## 📥 Instalando as dependências
 npm install
@@ -92,7 +92,7 @@ npx prisma studio
 ## ▶️ Executando o projeto
 
 Para iniciar o servidor em ambiente de desenvolvimento:
-
+```bash
 npm run dev
 
 A aplicação estará disponível em:
@@ -102,7 +102,7 @@ http://localhost:3000
 
 ## ▶️👨‍🔬 Executando os testes e2e
 
-Foi criado um arquivo chamado testes.spec.ts com os testes de todas as telas e rotas HTTP disponíveis no projeto.
+Foi criado um arquivo chamando testes.spec.ts com os testes de todas as telas e rotas HTTP disponíveis no projeto.
 
 Para executar os testes end-to-end, apenas execute no terminal do projeto a seguinte instrução:
 
