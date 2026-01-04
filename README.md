@@ -56,30 +56,40 @@ Git
 
 
 ## 📦 Clonando o repositório
+
+```bash
 git clone https://github.com/daletejesus/meus-mapas
 cd meus-mapas
+```
 
 ## 📥 Instalando as dependências
+
+```bash
 npm install
+```
 
 ## ⚙️ Configurando as variáveis de ambiente
 
 Crie um arquivo .env na raiz do projeto e configure a conexão com o banco de dados:
 
+```bash
 DATABASE_URL="postgresql://usuario:senha@localhost:5432/meus_mapas"
+```
 
 Adicione também a url base do projeto:
 
+```bash
 NEXT_PUBLIC_API_URL="http://localhost:3000"
-
+```
 
 ## 🗄️ Configurando o Prisma
 
 Execute os comandos abaixo para configurar o banco de dados:
 
+```bash
 npx prisma generate
 npx prisma migrate dev
-
+```
 
 prisma generate → gera o Prisma Client
 
@@ -87,7 +97,9 @@ prisma migrate dev → cria e aplica as migrations no banco de dados
 
 Opcionalmente, para visualizar os dados no Prisma Studio:
 
+```bash
 npx prisma studio
+```
 
 ## ▶️ Executando o projeto
 
@@ -99,8 +111,9 @@ npm run dev
 
 A aplicação estará disponível em:
 
+```bash
 http://localhost:3000
-
+```
 
 
 ## ▶️👨‍🔬 Executando os testes e2e
@@ -109,6 +122,8 @@ Foi criado um arquivo chamando testes.spec.ts com os testes de todas as telas e 
 
 Para executar os testes end-to-end, apenas execute no terminal do projeto a seguinte instrução:
 
+```bash
 npm run test:e2e
+```
 
 Ao executar, será executado um arquivo seed para limpar o banco de dados para testar inclusões e retornos de dados de teste, sendo possível acompanhar o resultado de cada teste pelo terminal.
