@@ -92,12 +92,15 @@ npx prisma studio
 ## ▶️ Executando o projeto
 
 Para iniciar o servidor em ambiente de desenvolvimento:
+
 ```bash
 npm run dev
+```
 
 A aplicação estará disponível em:
 
 http://localhost:3000
+
 
 
 ## ▶️👨‍🔬 Executando os testes e2e
