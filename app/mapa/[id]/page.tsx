@@ -34,7 +34,7 @@ export default function Home() {
   const [activeModal, setActiveModal] = useState<boolean>(false);
   const [pontoCriado, setPontoCriado] = useState<any>(false);
   const router = useRouter(); 
-  const URL=process.env["NEXT_PUBLIC_URL"]!
+
 
   const selectedItem = valor.find(item => item.id === selectedId);
 
@@ -44,7 +44,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const response = await axios.get(`${URL}/api/ponto?idMapa=${id}`);
+        const response = await axios.get(`/api/ponto?idMapa=${id}`);
         
         const { mapa, pontos } = response.data;
 
@@ -59,7 +59,7 @@ export default function Home() {
 
       } catch (error: any) {
         if (error.response?.status === 404) {
-          router.replace(`${URL}/not-found`); // 👈 redireciona
+          router.replace(`/not-found`); // 👈 redireciona
         } else {
           console.error("Erro ao buscar pontos", error);
         }
@@ -82,7 +82,7 @@ export default function Home() {
   }) {
     try {
 
-      const send = await axios.post(`${URL}/api/ponto`, {
+      const send = await axios.post(`/api/ponto`, {
         name: data.nome,
         idMapa: id,
         latitude: data.latitude,
@@ -103,7 +103,7 @@ export default function Home() {
     try {
 
 
-      const send = await axios.patch(`${URL}/api/ponto`, {
+      const send = await axios.patch(`/api/ponto`, {
         id: id,
         status: false
       })

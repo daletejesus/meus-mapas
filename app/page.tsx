@@ -15,12 +15,12 @@ export default function Home() {
   const [mapaCriado, setMapaCriado] = useState<any>(false);
   
   const router = useRouter();
-  const URL=process.env["NEXT_PUBLIC_URL"]!
+ 
 
   useEffect(() => {
     async function retornarMapas() {
       try {
-        const response = await axios.get(`${URL}/api/mapa`);
+        const response = await axios.get(`/api/mapa`);
         setValor(response.data);
 
         console.log(response.data);
@@ -43,7 +43,7 @@ export default function Home() {
   }) {
     try {
 
-      const send = await axios.post(`${URL}/api/mapa`, {
+      const send = await axios.post(`/api/mapa`, {
         name: data.nome,
       })
 
@@ -62,7 +62,7 @@ export default function Home() {
 
       console.log(id);
 
-      const send = await axios.patch(`${URL}/api/mapa`, {
+      const send = await axios.patch(`/api/mapa`, {
         id: id,
         status: false
       })
@@ -78,7 +78,7 @@ export default function Home() {
   }
 
   function Redirect(id: number) {
-    router.push(`${URL}/mapa/${id}`);
+    router.push(`/mapa/${id}`);
   }
   
   return (
