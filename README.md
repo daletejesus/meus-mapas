@@ -34,8 +34,8 @@ Essa combinação permite uma aplicação consistente, tipada, com melhor manute
 
 - Deploy da aplicação (https://meus-mapas.vercel.app/);
 - Testes end-to-end das funcionalidades disponíveis;
-- Colletion das rotas HTTP para o Postman;
-- Animações utilizando o motion.dev;
+- Collection das rotas HTTP para o Postman;
+- Animações utilizando o motion;
 - Exlusão lógica dos items ao invés de exclusão física;
 
 ## 🚀 Como executar o projeto
