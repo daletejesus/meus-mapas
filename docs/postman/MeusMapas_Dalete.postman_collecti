@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "d3c389b3-73ed-44f9-88b7-f226801ee955",
+		"name": "Mapas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40901682"
+	},
+	"item": [
+		{
+			"name": "Mapa",
+			"item": [
+				{
+					"name": "Criar Mapa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{nomeMapa}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/mapa",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"mapa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retornar Mapas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/mapa",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"mapa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ativar/desativar mapa",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{idMapa}}\",\r\n    \"status\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/mapa",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"mapa"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ponto",
+			"item": [
+				{
+					"name": "Criar Ponto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{nomePonto}}\",\r\n    \"idMapa\": \"{{idMapa}}\",\r\n    \"latitude\": \"-23.510202654001375\",\r\n    \"longitude\": \"-46.888348994959166\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/ponto",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"ponto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retornar Pontos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/ponto?idMapa={{idMapa}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"ponto"
+							],
+							"query": [
+								{
+									"key": "idMapa",
+									"value": "{{idMapa}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ativar/desativar ponto",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{idPonto}}\",\r\n    \"status\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/ponto",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"ponto"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": ""
+		},
+		{
+			"key": "nomeMapa",
+			"value": ""
+		},
+		{
+			"key": "nomePonto",
+			"value": ""
+		},
+		{
+			"key": "idPonto",
+			"value": ""
+		},
+		{
+			"key": "idMapa",
+			"value": ""
+		}
+	]
+}
