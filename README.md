@@ -127,3 +127,18 @@ npm run test:e2e
 ```
 
 Ao executar, será executado um arquivo seed para limpar o banco de dados para testar inclusões e retornos de dados de teste, sendo possível acompanhar o resultado de cada teste pelo terminal.
+
+## 📮🔗 Collection Postman das rotas HTTP
+Na pasta docs/postman, está disponivel a collection com todas as rotas disponíveis no projeto.
+
+- Adicione nas váriaveis da collection a baseUrl:
+
+```bash
+https://meus-mapas.vercel.app
+```
+
+- Adicione um nome para o mapa e o ponto;
+
+- Ao criar um mapa, guarde o ID retornado e adicione na variavel idMapa;
+
+- Faça o mesmo para a variavél idPonto.
