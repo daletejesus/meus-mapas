@@ -1,36 +1,129 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## 📌 Descrição Geral do Projeto
 
-First, run the development server:
+Este projeto foi desenvolvido utilizando *Next.js, TypeScript e Tailwind CSS*, estruturado para oferecer uma aplicação moderna, organizada e escalável.  
+No back-end, foram criadas rotas de API seguindo o padrão *REST, utilizando os métodos **GET, POST e PATCH*.  
+No front-end, a biblioteca *Leaflet* é responsável por renderizar o mapa à partir dos pontos enviados pelo usuário, onde as informações são registradas no banco de dados através do *Prisma* conectado ao *PostgreSQL*.
+
+Essa combinação permite uma aplicação consistente, tipada, com melhor manutenção e segurança na troca de dados entre cliente e servidor.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+- *Next.js*
+- *TypeScript*
+- *Tailwind CSS*
+- *Leaflet*
+- *Prisma ORM*
+- *PostgreSQL*
+- *Motion (Animações)*
+- *REST API (GET, POST e PATCH)*
+
+---
+
+## ⚙️ Funcionalides
+
+- Criação de mapa a partir de um nome dado pelo usuário;
+- Listagem de todos os mapas ativos no banco de dados;
+- Possibilidade de excluir um mapa ativo (exclusão lógica);
+- Criação de pontos físicos relacionados ao mapa;
+- Listagem de todos os pontos ativos no banco de dados;
+- Exclusão lógica dos pontos ativos
+
+## ♻️ Diferencial do Projeto
+
+- Deploy da aplicação (https://meus-mapas.vercel.app/);
+- Testes end-to-end das funcionalidades disponíveis;
+- Collection das rotas HTTP para o Postman;
+- Animações utilizando o motion;
+- Exclusão lógica dos items ao invés de exclusão física;
+
+## 🚀 Como executar o projeto
+
+Este projeto foi desenvolvido utilizando Next.js, Prisma ORM e PostgreSQL.
+
+## 📋 Pré-requisitos
+
+Antes de iniciar, você precisará ter instalado em sua máquina:
+
+Node.js (versão 18 ou superior)
+
+npm ou yarn
+
+PostgreSQL
+
+Git
+
+
+## 📦 Clonando o repositório
+
+```bash
+git clone https://github.com/daletejesus/meus-mapas
+cd meus-mapas
+```
+
+## 📥 Instalando as dependências
+
+```bash
+npm install
+```
+
+## ⚙️ Configurando as variáveis de ambiente
+
+Crie um arquivo .env na raiz do projeto e configure a conexão com o banco de dados:
+
+```bash
+DATABASE_URL="postgresql://usuario:senha@localhost:5432/meus_mapas"
+```
+
+Adicione também a url base do projeto:
+
+```bash
+NEXT_PUBLIC_API_URL="http://localhost:3000"
+```
+
+## 🗄️ Configurando o Prisma
+
+Execute os comandos abaixo para configurar o banco de dados:
+
+```bash
+npx prisma generate
+npx prisma migrate dev
+```
+
+prisma generate → gera o Prisma Client
+
+prisma migrate dev → cria e aplica as migrations no banco de dados
+
+Opcionalmente, para visualizar os dados no Prisma Studio:
+
+```bash
+npx prisma studio
+```
+
+## ▶️ Executando o projeto
+
+Para iniciar o servidor em ambiente de desenvolvimento:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A aplicação estará disponível em:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## ▶️👨‍🔬 Executando os testes e2e
 
-To learn more about Next.js, take a look at the following resources:
+Foi criado um arquivo chamando testes.spec.ts com os testes de todas as telas e rotas HTTP disponíveis no projeto.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Para executar os testes end-to-end, apenas execute no terminal do projeto a seguinte instrução:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run test:e2e
+```
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Ao executar, será executado um arquivo seed para limpar o banco de dados para testar inclusões e retornos de dados de teste, sendo possível acompanhar o resultado de cada teste pelo terminal.
