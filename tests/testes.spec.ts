@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import "dotenv/config";
 
-const URL=process.env["URL"]!
+const URL=process.env["NEXT_PUBLIC_URL"]!
 
 // Teste página inicial- Tela 1
 test('Teste página inicial', async ({ page }) => {
