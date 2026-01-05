@@ -37,6 +37,7 @@ Essa combinação permite uma aplicação consistente, tipada, com melhor manute
 - Collection das rotas HTTP para o Postman;
 - Animações utilizando o motion;
 - Exclusão lógica dos items ao invés de exclusão física;
+- Página not-found para mapas não encontrados
 
 ## 🚀 Como executar o projeto
 
